@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+
+        body{
+            overflow-x: hidden;
+        }
+        .container{
+            text-align: center;
+            font-size: 40px;
+            color: white;
+            -webkit-text-stroke: 2px black;
+           
+        }
+
+        section{
+            height: 100vh;
+            background-color: bisque;
+            border: 1px solid black;
+        }
+
+        .container h1:first-child{
+            transform: translateX(-70vw);
+            transition: 0.9s !important;
+            
+        }
+        .container h1:last-child{
+            transform: translateX(70vw);
+            transition: 0.9s !important;
+            
+        }
+
+        .slider{
+            margin: auto;
+            width: 1140px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .sliderInner{
+            width: 150px;
+            height: 150px;
+            border-radius: 6px;
+            transition: 0.9s !important;
+        }
+        .sliderInner:nth-child(1){
+            background-image: url(./img/1.jpg);
+            background-size: cover;
+            transform: translateX(-30vw);
+            /* transition: 0.9s; */
+            
+        }
+        .sliderInner:nth-child(2){
+            background-image: url(./img/2.jpg);
+            background-size: cover;
+            transform: translateX(-50vw);
+            /* transition: 0.9s; */
+        }
+
+        .sliderInner:nth-child(3){
+            background-image: url(./img/3.jpg);
+            background-size: cover;
+            transform: translateX(-70vw);
+            /* transition: 0.9s; */
+        }
+        .sliderInner:nth-child(4){
+            background-image: url(./img/4.jpg);
+            background-size: cover;
+            transform: translateX(-110vw);
+            /* transition: 0.9s; */
+        }
+        .sliderInner:nth-child(5){
+            background-image: url(./img/5.jpg);
+            background-size: cover;  
+            transform: translateX(-120vw);
+            /* transition: 0.9s; */
+        }
+        .sliderInner:nth-child(6){
+            background-image: url(./img/6.jpg);
+            background-size: cover;
+            transform: translateX(-130vw);
+            /* transition: 0.9s; */
+        }
+    </style>
+</head>
+<body>
+    <section></section>
+    <section></section>
+    <section  id="thisSection">
+        <div class="container">
+            <h1>Hello</h1>
+            <h1>India</h1>
+        </div>
+        <div class="slider">
+            <div class="sliderInner">
+            
+            </div>
+            <div class="sliderInner">
+                
+            </div>
+            <div class="sliderInner">
+            
+            </div>
+            <div class="sliderInner">
+                
+            </div>
+            <div class="sliderInner">
+            
+            </div>
+            <div class="sliderInner">
+                
+            </div>
+    </div>
+    </section>
+    <section></section>
+   
+
+
+<script>
+    const box = document.querySelector('#thisSection');
+    const heading = document.querySelectorAll('.container h1');
+    const slider = document.querySelector('.slider');
+    const sliderInner = document.querySelectorAll('.sliderInner');
+
+    const winH = window.innerHeight;
+
+
+    window.addEventListener('scroll',() =>{
+        const details = box.getBoundingClientRect().top;
+
+
+        if(details < winH * 0.5){
+            heading[0].style.transform = `translateX(${0}px)`;
+            heading[1].style.transform = `translateX(${0}px)`;
+
+           
+           sliderInner.forEach((s)=>{
+            s.style.transform = `translateX(${0}px)`;
+           });    
+        }
+    });
+</script>
+</body>
+</html>

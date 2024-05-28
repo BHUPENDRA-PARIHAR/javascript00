@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Watch</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body{
+            height: 100vh;
+            display: grid;
+            place-items: center;
+            background-color:skyblue;
+        }
+
+        .clock{
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background-color: antiquewhite;
+            border: 10px double gray;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .clock-center{
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background-color: antiquewhite;
+            border: 5px solid gray;
+            box-shadow: 0 0  px 4px gray;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50% , -50%);
+            position: absolute;
+            z-index: 9999;
+        }
+        .number li{
+            position: absolute;
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        .number li:nth-child(1){      
+            left: 50%;
+            transform: translateX(-50%);
+            top: 3px;
+        }
+        .number li:nth-child(2){
+            top: 50%;
+            transform: translateY(-50%);
+            right: 3px;
+            
+        }
+        .number li:nth-child(3){
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 3px;
+        }
+        .number li:nth-child(4){
+            top: 50%;
+            transform: translateY(-50%);
+            left: 3px;
+        }
+        
+        .marks li{
+            height: 110%;
+            width: 2px;
+            background-color: gray;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50% , -50%);
+        }
+        .inner{
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: antiquewhite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .hands li{
+            position: absolute; 
+            left: 50%;
+            bottom: 50%;
+            transform: translateX(-50%);
+            transform-origin: bottom;
+        }
+        .seconds{
+            height: 120px;
+            background-color: goldenrod;
+            width: 2px;
+        }
+        .minutes{
+            height: 100px;
+            background-color: goldenrod;
+            width: 3px;
+        }
+        .hours{
+            height: 90px;
+            background-color: goldenrod;
+            width: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="clock-center"> 
+        </div>
+            
+        
+        <ul class="marks">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="inner">
+            <ul class="number">
+                <li>12</li>
+                <li>3</li>
+                <li>6</li>
+                <li>9</li>
+            </ul>
+            <ul class="hands">
+                <li class="hours"></li>
+                <li class="minutes"></li>
+                <li class="seconds"></li>
+            </ul>
+        </div>
+
+    </div>
+
+<script>
+    const allLi= document.querySelectorAll('.marks li');
+    const HoursHand = document.querySelector('.hours');
+    const MinutesHand = document.querySelector('.minutes');
+    const SecondHand = document.querySelector('.seconds');
+
+    let angle=0;
+    allLi.forEach((li)=>{
+        li.style.transform =`translate(-50% , -50%) rotate(${angle}deg)`;
+        angle+=30;
+    });
+
+    const runClock =()=>{
+        const now =new Date();
+
+        const seconds = now.getSeconds();
+        const minutes = now.getMinutes();
+        let hours = now.getHours();
+        hours =(hours > 12) ?  hours-12 : hours;
+
+        let HoursToMinutes = (hours * 60) + minutes;
+
+        SecondHand.style.transform = `translateX(-50%) rotate(${seconds * 6}deg)`; 
+        
+        HoursHand.style.transform = `translateX(-50%) rotate(${HoursToMinutes * 0.5}deg)`;
+        MinutesHand.style.transform = `translateX(-50%) rotate(${minutes * 6}deg)`;
+    };
+    runClock();
+
+    setInterval(runClock, 1000)
+    </script>
+</body>
+</html>

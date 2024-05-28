@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lightbox</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            cursor: pointer ;
+        }
+        .container{
+            width: 1320px;
+            margin:30px auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            box-shadow: 0 0 10px 4px lightgray;
+            padding: 5px;
+         
+        }
+        .container > div{
+            height: 200px;
+        }
+
+        .popup{
+            width: 60vw;
+            height: 400px;
+            position: fixed;
+            background-color: red;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: 0.3s;
+        }
+
+        .popup div{
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            color: black;
+            font-size: 50px;
+            padding: 20px;
+            -webkit-text-stroke: 2px white;
+        }
+
+        .popup i{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup">
+        
+        <img src="img.src" alt="">
+        <div>
+            <i class="fa-solid fa-chevron-left"></i>
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+    </div>
+    <div class="container">
+
+        <div>
+            <img src="https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg" alt="">
+        </div>
+        <div>
+            <img src="https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+        </div>
+        <div>
+            <img src="https://images.pexels.com/photos/1820563/pexels-photo-1820563.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+        </div>
+        <div>
+            <img src="https://images.pexels.com/photos/534164/pexels-photo-534164.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+        </div>
+        <div>
+            <img src="https://images.pexels.com/photos/2105416/pexels-photo-2105416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+        </div>
+        <div>
+            <img src="https://images.pexels.com/photos/1424239/pexels-photo-1424239.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+        </div>
+        <div>
+            <img src="https://images.pexels.com/photos/54332/currant-immature-bush-berry-54332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+        </div>
+        <div>
+            <img src="https://images.pexels.com/photos/1820563/pexels-photo-1820563.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+        </div>
+        <div>
+            <img src="https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg" alt="">
+        </div>
+        <div>
+            <img src="https://images.pexels.com/photos/54332/currant-immature-bush-berry-54332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+        </div>
+        <div>
+            <img src="https://images.pexels.com/photos/2105416/pexels-photo-2105416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+        </div>
+        <div>
+            <img src="https://images.pexels.com/photos/1820563/pexels-photo-1820563.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+        </div>
+    </div>
+    <script>
+        const allImg = document.querySelectorAll('img');
+        const popup = document.querySelector('.popup');
+        const popupImg = document.querySelector('.popup img');
+        const prev = document.querySelector('.popup div i:first-child');
+        const next = document.querySelector('.popup div i:last-child');
+
+        let currentIndex;
+        
+        allImg.forEach((img, i)=> {
+            img.addEventListener('click', ()=>{
+                popupImg.src = img.src;
+
+                currentIndex =i;
+
+                popup.style.transform =  'translate(-50%, -50%) scale(1)';
+            })
+        });
+
+        next.addEventListener('click', ()=>{
+            currentIndex++;
+            
+            if(currentIndex > 12){
+                currentIndex=1;
+            }
+            popupImg.src = allImg[currentIndex].src;
+        })
+
+        prev.addEventListener('click', ()=>{
+            currentIndex--;
+            
+            if(currentIndex < 1){
+                currentIndex= allImg.length -1;
+            }
+            popupImg.src = allImg[currentIndex].src;
+        })
+
+        popup.addEventListener('mouseleave', ()=>{
+            popup.style.transform =  'translate(-50%, -50%) scale(0)';
+        }); 
+    </script>
+</body>
+</html>

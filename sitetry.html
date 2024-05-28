@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jcrform</title>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        list-style: none;
+        box-sizing: border-box;
+    }
+
+.banner-form{
+    background-color: rgba(0,0,0,0.2);
+    margin-top:30px;
+    padding: 10px;    
+    border-radius: 6px;
+}
+
+.banner-form > form > div:first-child{
+    border-bottom: 1px solid white;
+    text-align: left;
+}
+
+.banner-form > form > div:first-child button{
+    padding:10px 20px;
+    background-color: white;
+    border-radius: 6px 6px 0 0;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.banner-form-active-btn{
+    background-color: #009ddc !important;
+    color: white !important;
+}
+.banner-form > form > div:last-child{
+    display: flex;
+    padding-top: 25px;
+}
+.banner-form > form > div:last-child input,
+.banner-form > form > div:last-child select
+{
+    font: 18px;
+    padding: 6px 8px;
+    border: 1px solid lightslategrey;
+}
+
+.banner-form > form > div:last-child button{
+    background-color: #009ddc;
+    color: white;
+    font-weight: 500;
+    border-radius: 0 4px 4px 0;
+    border: none;
+    padding: 10px 20px;
+}
+
+.container{
+    width: 1170px; 
+   margin: auto;
+}
+
+.form-content{
+    display: none;
+}
+
+.form-body .content-1{
+    display: grid;
+    grid-template-columns: 40% 40% 25% 20% 15%;
+    gap: 10px;
+}
+.form-body .content-2{
+    display: grid;
+    grid-template-columns: 40% 40% 25% 25% 15%;
+    gap: 10px;
+}
+.form-body .content-3{
+    display: grid;
+    grid-template-columns: 40% 40% 25% 25% 15%;
+    gap: 10px;
+}
+
+</style>
+</head>
+<body>
+    <div class="container">
+         <div class="banner-form">
+                    <form action="">
+                        <div class="btns">
+                            <button type="button" class="banner-form-active-btn">Local Trip</button>
+                            <button type="button">One Way Trip</button>
+                            <button type="button">Round Trip</button>
+                        </div>
+                        <div class="form-content">
+                            <div class="content-1">
+                            <select name="" id="">
+                                <option value="">Select form City</option>
+                                <option value="">Jodhpur</option>
+                                <option value="">Bikaner</option>
+                                <option value="">Jaipur</option>
+                                <option value="">Kota</option>
+                            </select>
+                            <input type="text" placeholder="No.1 of People">
+                            <input type="date">
+                            <input type="date">
+                            <button>
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <span>Search</span>
+                            </button>
+                        </div>
+                            <div class="content-2">
+                                <select name="" id="">
+                                    <option value="">Select form City</option>
+                                    <option value="">Jodhpur</option>
+                                    <option value="">Bikaner</option>
+                                    <option value="">Jaipur</option>
+                                    <option value="">Kota</option>
+                                </select>
+                                <input type="text" placeholder="No.2 of People">
+                                <input type="date">
+                                <input type="date">
+                                <button>
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <span>Search</span>
+                                </button>
+                            </div>
+                            <div class="content-3">
+                                <select name="" id="">
+                                    <option value="">Select form City</option>
+                                    <option value="">Jai</option>
+                                    <option value="">Bikaner</option>
+                                    <option value="">Jaipur</option>
+                                    <option value="">Kota</option>
+                                </select>
+                                <input type="text" placeholder="No.3 of People">
+                                <input type="date">
+                                <input type="date">
+                                <button>
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <span>Search</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-body">
+                            <div class="content-1">
+                                <select name="" id="">
+                                    <option value="">Select form City</option>
+                                    <option value="">Jodhpur</option>
+                                    <option value="">Bikaner</option>
+                                    <option value="">Jaipur</option>
+                                    <option value="">Kota</option>
+                                </select>
+                                <input type="text" placeholder="No.1 of People">
+                                <input type="date">
+                                <input type="date">
+                                <button>
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <span>Search</span>
+                                </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+<script>
+    const allbtn = document.querySelectorAll('.btns button');
+    const allcontent = document.querySelectorAll('.form-content div');
+    const fbody =document.querySelector('.form-body');
+    
+    
+
+    allbtn.forEach((btn, i)=>{
+        btn.addEventListener('click', ()=>{
+            console.log(i);
+
+            fbody.innerHTML = "";
+            fbody.appendChild(allcontent[i]);
+        })
+    })
+    
+</script>
+</body>
+</html>

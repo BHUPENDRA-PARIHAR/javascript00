@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>digital clock</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            background-color: black;
+        }
+        .container{
+            width: 500px;
+            margin: 100px auto;
+            text-align: center;
+            color: skyblue;
+            border: 5px double skyblue;
+            border-radius: 6px;
+        }
+        .container div:first-child{
+            font-size: 50px;
+            text-transform: uppercase;
+            padding: 30px 0;
+        }
+        .container div:last-child{
+            font-size: 22px;
+            text-transform: capitalize;
+            padding-bottom: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            hrs:min:sec
+        </div>
+        <div>
+            day and date
+        </div>
+    </div>
+    <script>
+        const timeContainer = document.querySelector('.container div:first-child');
+        const DateeContainer = document.querySelector('.container div:last-child');
+
+        const setTime =()=>{
+            const currentDate =new Date();
+
+            let hours = currentDate.getHours();
+            let minuts = currentDate.getMinutes();
+            let sec = currentDate.getSeconds();
+
+            minuts = (minuts < 10) ? '0' + minuts : minuts;
+            sec =    (sec < 10) ? '0' + sec : sec; 
+            hours = (hours > 12 )? hours - 12 : hours;
+            hours = (hours < 10) ? '0' + hours : hours;
+
+ 
+
+            timeContainer.innerHTML = `${hours} : ${minuts} : ${sec}`
+
+            DateeContainer.innerHTML = currentDate.toDateString();
+
+        };
+        setTime();
+        setInterval(setTime,1000);
+
+    </script>
+</body>
+</html>

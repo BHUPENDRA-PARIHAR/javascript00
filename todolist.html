@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        list-style: none;
+        box-sizing: border-box;
+    }
+
+    body{
+        height: 100vh;
+        display: flex;
+        place-items: center;
+        background-color: lightcyan;
+    }
+    .container{
+        width: 1000px;
+        margin: auto;
+        border-radius: 6px;
+        background-color:cadetblue;
+        box-shadow: 0 0 8px 6px cadetblue;
+    }
+
+    .container h1{
+        padding: 10px 0;
+        text-align: center;
+        color:whitesmoke;
+        font-size: 45px;
+    }
+
+    
+    .todo-head{
+        padding: 10px 20px;
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 20px;
+    }
+
+    .todo-head input{
+        padding: 10px 0;
+        border-radius: 4px;
+        border: 1px solid black;
+        margin-left:50px;
+    }
+    .todo-head button{
+        width: 150px;
+        border-radius: 4px;
+        border: 1px solid black;
+        background-color:blanchedalmond;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase;
+        border: none;
+        color: black;
+        cursor: pointer;
+    }
+    .todo-body{
+        padding: 20px;
+    }
+
+    .todo-body ul li{
+        margin: 10px;
+        width: 100%;
+        border-bottom: 1px dotted lightgray;
+        padding: 6px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .done span{
+        text-decoration: line-through !important;
+        color: gray !important;
+    }
+    .todo-body ul li span{
+        font-size: 30px;
+        font-weight: bolder;
+        text-transform: capitalize;
+    }
+
+    .todo-body ul li input[type=checkbox]{
+        height:18px;
+        width: 18px;
+    }
+    
+    .todo-body ul li button{
+        margin-right: 5px;
+        padding: 10px 25px;
+        background-color:blanchedalmond;
+        color: black;
+        border: none;
+        border-radius: 4px;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: capitalize;
+        cursor: pointer;
+    }
+    .control-Btn{
+        padding: 15px 10px;
+        display: grid;
+        grid-template-columns:repeat(5, 1fr);
+        gap: 10px;
+    }
+
+    .control-Btn button{
+        padding: 15px 0;
+        border-radius: 4px;
+        background-color: blanchedalmond;
+        border: none;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .control-Btn button:hover{
+        background-color: black;
+        color: blanchedalmond;
+    }
+
+</style>
+<body>
+    <div class="container">
+        <h1>Day Routine Tasks</h1>
+        <div class="todo-head">
+            
+            <input type="text">
+            <button>add task</button>
+        </div>
+        <div class="todo-body">
+            <ul>
+                <!-- <li class="done">
+                    <input type="checkbox">
+                    <span>task</span>
+                    <button>Delete</button>
+                </li>
+                <li>
+                    <input type="checkbox">
+                    <span>task</span>
+                    <button>Delete</button>
+                </li>
+                <li>
+                    <input type="checkbox">
+                    <span>task</span>
+                    <button>Delete</button>
+                </li>
+                <li>
+                    <input type="checkbox">
+                    <span>task</span>
+                    <button>Delete</button>
+                </li> -->
+             </ul>
+        </div>
+        <div class="control-Btn">
+            <button>Done Tasks (0)</button>
+            <button>Panding Tasks (0)</button>
+            <button>All Tasks (0)</button>
+            <button>Delete Done Tasks (0)</button>
+            <button>Delete All Tasks (0)</button>
+         </div>
+    </div>
+<script>
+    const textInp = document.querySelector('.todo-head input[type=text]');
+    const addTaskBtn = document.querySelector('.todo-head button');
+    const taskList = document.querySelector('.todo-body > ul');
+    const ctrlBtn =document.querySelectorAll('control-Btn button');
+
+    const showData=()=>{
+        taskList.innerHTML='';
+        const dataToShow = JSON.parse(localStorage.getItem('todolist_101')) || [];
+
+        dataToShow.forEach((taskData, i) => {
+             
+            const newLi =document.createElement('li');
+
+            if(taskData.status)
+            {
+                newLi.classList.add('done');
+            }
+
+
+             const newCheckBox = document.createElement('input');
+             newCheckBox.type ='checkbox';
+             newCheckBox.checked =taskData.status;
+
+
+            newCheckBox.value = taskData.id;
+            newCheckBox.onclick = ()=>{
+                
+               const ifChecked = newCheckBox.checked;
+               const dataToHandleStatus = JSON.parse(localStorage.getItem('todolist_101')) || [];
+
+               dataToHandleStatus.forEach((objTask, index)=>{
+                if(objTask.id == taskData.id){
+                    dataToHandleStatus[index].status =ifChecked;
+
+               localStorage.setItem('todolist_101', JSON.stringify(dataToHandleStatus));
+
+                    
+             }
+               });
+               showData();
+            }
+
+            const span = document.createElement('span');
+            span.innerText = taskData.task;
+
+            const dltBtn = document.createElement('button');
+            dltBtn.innerText = 'Delete';
+            dltBtn.onclick = ()=>{
+
+                if(confirm('Are You Sure Too Delete Your Task..')){
+                const DataoHandleDelete =JSON.parse(localStorage.getItem('todolist_101')) || [];
+                DataoHandleDelete.splice(i,1);
+
+                localStorage.setItem('todolist_101', JSON.stringify(DataoHandleDelete));
+                showData();
+            }
+            }
+
+            newLi.appendChild(newCheckBox);
+            newLi.appendChild(span);
+            newLi.appendChild(dltBtn);
+        
+            taskList.appendChild(newLi);
+        });
+    };
+    showData();
+
+    addTaskBtn.addEventListener('click',()=>{
+        const userVal = textInp.value;
+
+        if(!userVal)
+        {
+            alert('Please enter a task');
+        }
+
+        else
+        {
+            const taskList = JSON.parse(localStorage.getItem('todolist_101')) || [];
+            let id =1;
+
+            if(taskList.length != 0){
+                id = taskList[taskList.length -1].id + 1;
+            }
+            
+            const taskObj ={
+                id:id, 
+                task:userVal,
+                status:false    
+            }
+            taskList.push(taskObj);
+
+            localStorage.setItem('todolist_101', JSON.stringify(taskList));
+            showData(); 
+
+        }
+    }); 
+
+</script>
+</body>
+</html>

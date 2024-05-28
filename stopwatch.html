@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StopWatch</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+        .container{
+            width: 400px;
+            margin: 100px auto;
+            box-shadow: 0 0 7px 2px aqua ;
+            padding: 30px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 50px;
+            font-weight: 700;
+        }
+        .container div{
+            padding: 10px 0 ;
+        }
+
+        .container button{
+            width: 100%;
+            padding: 10px;
+            background-color: aqua;
+            font-weight: 700;
+            border: none;
+            border-radius: 6px;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .popup{
+            width: 800px;
+            height: 500px;
+            background-color: rgba(153,253,253,0.3);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            transition: 0.4s;
+        }
+        .popup span{
+           display: block;
+           font-size: 70px;
+           font-weight: 700;
+           -webkit-text-stroke: 2px black;
+           color: white;
+           
+        }
+
+        .popup button{
+            padding: 8px 20px;
+            color: black;
+            font-size: 22px;
+            font-weight: 700;
+            border: none;
+            background-color: aqua;
+            border-radius: 8px;
+            margin: 20px 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span>00: 00: 00</span>
+
+        <div>
+            <button id="StartBtn">Start</button>
+        </div>
+    </div>
+
+    <div class="popup">
+        <div>
+            <span>00 : 00 : 00</span>
+            <button id="Start">Start</button>
+            <button id="Reset">Reset</button>
+        </div>
+            
+        
+    </div>
+
+    <script>
+        const container = document.querySelector('.container span');
+        const btn = document.querySelector('#StartBtn');
+        const popup = document.querySelector('.popup');
+        const popContent = document.querySelector('.popup span');
+        const popupStart = document.querySelector('#Start');
+        const popupReset = document.querySelector('#Reset');
+         
+        let watchInterwel;
+        let min=0;
+        let sec=0;
+        let ms=1;
+        
+        const runwatch =()=>{
+            ms= (ms < 10) ? '0' + ms : ms;
+            
+            container.innerHTML = `${min < 10 ? '0' + min : min} : ${sec < 10 ? '0' + sec : sec} : ${ms}`;
+            
+            ms++;
+
+            if(ms === 100){
+            sec++;
+            ms=0;
+            }
+           
+            if(sec === 60){
+            min ++;
+            sec = 0;
+            }
+         }
+
+         StartBtn.addEventListener('click' , ()=>{
+             
+            if(StartBtn.innerText == 'Start') {
+
+                watchInterwel = setInterval(runwatch, 10);
+
+                StartBtn.innerText = 'Stop';
+            }
+            else{
+
+                clearInterval(watchInterwel);
+                StartBtn.innerText = 'Start';
+
+                popup.style.transform = 'translate(-50%, -50%) scale(1)'; 
+
+                // popContent.innerText = `${min < 10 ? '0' + min : min} : ${sec < 10 ? '0' + sec : sec} : ${ms}`;
+                popContent.innerText = container.innerText;
+            }
+        });
+
+        popupStart.addEventListener('click' , ()=>{
+            popup.style.transform = 'translate(-50%, -50%) scale(0)';
+            watchInterwel = setInterval(runwatch, 10);
+            StartBtn.innerText = 'Stop';
+        })
+
+        popupReset.addEventListener('click', ()=>{
+            popup.style.transform = 'translate(-50%, -50%) scale(0)';
+        
+         min=0;
+         sec=0;
+         ms=0;
+            container.innerHTML = `${min < 10 ? '0' + min : min} : ${sec < 10 ? '0' + sec : sec} : ${ms < 10 ? '0' + ms : ms}`;
+        })
+
+    </script>
+</body>
+</html>

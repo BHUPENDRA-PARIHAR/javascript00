@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 100vh;
+            text-align: center;
+        }
+
+        .full{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .full > div{
+            width: 250px;
+            padding: 15px;
+            margin-right: 10px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            background-color:lightgray;
+        }
+
+        button{
+            border: none;
+            background-color: cadetblue;
+            color: black;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="full">
+    <div class="one" id="d1">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia id incidunt expedita eos eligendi autem consequatur maiores. Magni autem hic, molestias quis dolorum, asperiores expedita tenetur, nihil deleniti dignissimos ut?</p>
+    </div>
+    <div class="two" id="d2">
+        <p>
+            Ancient manuscripts also divided sentences into paragraphs with line breaks (newline) followed by an initial at the beginning of the next paragraph. An initial is an oversized capital letter, sometimes outdented beyond the margin of the text. 
+        </p>
+    </div>
+</div>
+    <button onclick="changePera('d1','d2')"> Swap</button>
+<script>
+        const d1 = document.getElementById('d1').innerHTML;
+        const d2 = document.getElementById('d2').innerHTML;
+       
+
+
+    function changePera(d1,d2){
+       const a=document.getElementById(d1).innerHTML;
+       const b=document.getElementById(d2).innerHTML;
+      
+       document.getElementById(d1).innerHTML =b;
+       document.getElementById(d2).innerHTML =a;
+}
+
+</script>
+</body>
+</html>

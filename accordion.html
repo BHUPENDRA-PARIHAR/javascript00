@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+    <style>
+        *{
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        list-style: none;
+        box-sizing: border-box;
+        }
+        .accord{
+            width: 1140px;
+            margin: auto;
+            margin-top: 50px;
+        }
+        
+        .quest{
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid gray;
+            color: #213C2B;
+        }
+
+        .quest h3{
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            
+        }
+
+        .quest:hover{
+            color:skyblue;
+        }
+
+        .ans{
+            font-size: 18px;
+            font-weight: 400;
+            transform-origin: top;
+            height: 0;
+            transform: scaleY(0); 
+        }
+
+        .ans p{
+            padding: 10px 0;  
+        }
+        
+        .active{
+            transform: scaleY(1); 
+            height: auto;
+            transition: 0.4s;
+        }
+
+        .change{
+            border-bottom: 1px solid skyblue;
+            color: skyblue;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="accord">
+        <div class="accord-item">
+        <div class="quest">
+            
+            <h3> What is total size of Hero Homes Mohali?</h3>
+            <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="ans">
+            <p>
+                The project is built over an area of 18.49 Acres
+            </p>
+        </div>
+    </div>
+    <div class="accord-item">
+        <div class="quest">
+            
+            <h3> Where is Hero Homes Mohali located?</h3>
+            <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="ans">
+            <p>
+                The project is located in Sector-88, Mohali.
+            </p>
+        </div>
+    </div>
+    <div class="accord-item">
+        <div class="quest">
+            
+            <h3> What is the construction status of Project?</h3>
+            <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="ans">
+            <p>
+                The construction status of Phase 2 is New Launch.
+            </p>
+        </div>
+    </div>
+    <div class="accord-item">
+        <div class="quest">
+            
+            <h3> What all property types are there In Hero Homes Mohali?</h3>
+            <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="ans">
+            <p>
+                The project is built over an area of 18.49 Acres
+            </p>
+        </div>
+    </div>
+    <div class="accord-item">
+        <div class="quest">
+            
+            <h3> Which are the key amenities of Hero Homes Mohali?</h3>
+            <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="ans">
+            <p>
+                Swimming Pool, Barbecue, Skating Rink, Squash Court, Billiards and Banquet Hall are some of the key amenities of Hero Homes Mohali.
+            </p>
+        </div>
+    </div>
+    <div class="accord-item">
+        <div class="quest">
+            
+            <h3> What is the 3 bedroom price in Hero Homes Mohali?</h3>
+            <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="ans">
+            <p>
+                The project offers 3 BHK units for 85.32 L.
+            </p>
+        </div>
+    </div>
+    <div class="accord-item">
+        <div class="quest">
+            
+            <h3> How many towers are there in Hero Homes Mohali?</h3>
+            <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="ans">
+            <p>
+                There is 14 tower in the project, which offer a total of 1286 housing units.
+            </p>
+        </div>
+    </div>
+     <div class="accord-item">
+        <div class="quest">
+            
+            <h3> Does Hero Homes Mohali have swimming pool?</h3>
+            <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="ans">
+            <p>
+                The project has a swimming pool
+            </p>
+        </div>
+    </div>
+    </div>
+     
+<script>
+    const quest = document.querySelectorAll('.quest');
+    
+
+    quest.forEach((q)=>{
+        q.addEventListener('click', ()=>{
+            const AllAns = document.querySelectorAll('.ans');
+            const AllIcons = document.querySelectorAll('i');
+            const icon= q.querySelector('i');
+            
+            quest.forEach((que)=>{
+                if(que != q){
+                q.classList.toggle('change');
+                }
+        })
+             
+            
+            const currentAns = q.nextElementSibling;
+             AllAns.forEach((ans)=>{
+            if(ans !== currentAns){
+                ans.classList.remove('active');
+            }
+            });
+
+            
+            AllIcons.forEach((i)=>{
+                if(i != icon){
+                i.classList.remove('fa-minus');
+                i.classList.add('fa-plus');
+                }
+            })
+             currentAns.classList.toggle('active'); 
+             icon.classList.toggle('fa-plus');
+             icon.classList.toggle('fa-minus');
+        })
+    })
+</script>    
+</body>
+</html>
